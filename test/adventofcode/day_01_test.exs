@@ -46,4 +46,14 @@ defmodule Adventofcode.Day01Test do
     floor = Adventofcode.Day01.calculate_floor ")())())"
     assert floor == -3
   end
+
+  test "given the instruction ')' should result in 1 index" do
+    index = Adventofcode.Day01.enter_basement ")"
+    assert index == 1
+  end
+
+  test "given the instruction '()())' should result in 5 index" do
+    index = Adventofcode.Day01.enter_basement "()())"
+    assert index == 5
+  end
 end

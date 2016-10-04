@@ -1,23 +1,34 @@
 defmodule Adventofcode.Day01 do
 
+  def enter_basement(instructions) do
+    instructions
+    |> to_char_list
+    |> follow_instructions(0, 0)
+  end
+
+  defp follow_instructions(_directions, index, -1), do: index
+
+  defp follow_instructions([40 | directions], index, floor) do
+    follow_instructions(directions, index + 1, floor + 1)
+  end
+
+  defp follow_instructions([41 | directions], index, floor) do
+    follow_instructions(directions, index + 1, floor - 1)
+  end
+
   def calculate_floor(instructions) do
     instructions
     |> to_char_list
-    |> count_up
-    |> count_down
-    |> floor
+    |> count
   end
 
-  defp count_up(directions) do
-    up = Enum.count(directions, fn(direction) -> direction == 40 end)
-    {directions, up}
+  defp count(directions) do
+    Enum.reduce(directions, 0, fn(direction, acc) ->
+      case direction do
+        40 -> acc + 1
+        41 -> acc - 1
+      end
+    end)
   end
-
-  defp count_down({directions, up}) do
-    down = Enum.count(directions, fn(direction) -> direction == 41 end)
-    {directions, up, down}
-  end
-
-  defp floor({_directions, up, down}), do: up - down
 
 end
