@@ -9,11 +9,11 @@ defmodule Adventofcode.Day01 do
   defp follow_instructions(_directions, index, -1, :basement), do: index
   defp follow_instructions([], _index, floor, _atom), do: floor
 
-  defp follow_instructions([40 | directions], index, floor, atom) do
+  defp follow_instructions([?( | directions], index, floor, atom) do
     follow_instructions(directions, index + 1, floor + 1, atom)
   end
 
-  defp follow_instructions([41 | directions], index, floor, atom) do
+  defp follow_instructions([?) | directions], index, floor, atom) do
     follow_instructions(directions, index + 1, floor - 1, atom)
   end
 
