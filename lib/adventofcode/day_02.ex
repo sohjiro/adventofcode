@@ -1,5 +1,22 @@
 defmodule Adventofcode.Day02 do
 
+  def calculate_ribbon(params) do
+    params
+    |> String.split("\n")
+    |> Stream.map(&split_and_convert/1)
+    |> Stream.map(&total_ribbon/1)
+    |> Enum.sum
+  end
+
+  defp total_ribbon(dimentions) do
+    dimentions
+    |> calculate_ribbon_bow
+    |> calculate_ribbon_wrap
+  end
+
+  defp calculate_ribbon_bow([a, b, c] = dimentions), do: {Enum.sort(dimentions), a * b * c}
+  defp calculate_ribbon_wrap({[a, b, _c], perimeter}), do: 2 * (a + b) + perimeter
+
   def calculate_paper(params) do
     params
     |> String.split("\n")
