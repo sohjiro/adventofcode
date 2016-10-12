@@ -8,11 +8,9 @@ defmodule Adventofcode.Day03 do
 
     santa = directions
     |> calculate_for(:santa)
-    |> Enum.uniq
 
     robot = directions
     |> calculate_for(:robot)
-    |> Enum.uniq
 
     santa ++ robot
     |> Enum.uniq
@@ -20,13 +18,13 @@ defmodule Adventofcode.Day03 do
   end
 
   defp calculate_for(directions, atom) do
-    IO.puts "atom : #{inspect atom}"
     directions
     |> Keyword.get_values(atom)
     |> Enum.reverse
     |> add_starting_point
     |> convert_to_coordinates
     |> follow_directions([])
+    |> Enum.uniq
   end
 
   def split_directions([], data), do: data
