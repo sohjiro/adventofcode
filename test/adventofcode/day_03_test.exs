@@ -17,19 +17,24 @@ defmodule Adventofcode.Day03Test do
     assert delivers == 2
   end
 
-  test "given a direction '^v' and a robot santa should deliver present to 3 houses" do
-    delivers = Adventofcode.Day03.delivers_with_robot("^v")
-    assert delivers == 3
-  end
+  # test "given a direction '^v' and a robot santa should deliver present to 3 houses" do
+  #   delivers = Adventofcode.Day03.delivers_with_robot("^v")
+  #   assert delivers == 3
+  # end
 
-  test "given a direction '^>v<' and a robot santa should deliver present to 3 houses" do
-    delivers = Adventofcode.Day03.delivers_with_robot("^>v<")
-    assert delivers == 3
-  end
+  # test "given a direction '^>v<' and a robot santa should deliver present to 3 houses" do
+  #   delivers = Adventofcode.Day03.delivers_with_robot("^>v<")
+  #   assert delivers == 3
+  # end
 
-  test "given a direction '^v^v^v^v^v' and a robot santa should deliver present to 3 houses" do
-    delivers = Adventofcode.Day03.delivers_with_robot("^v^v^v^v^v")
-    assert delivers == 11
+  # test "given a direction '^v^v^v^v^v' and a robot santa should deliver present to 11 houses" do
+  #   delivers = Adventofcode.Day03.delivers_with_robot("^v^v^v^v^v")
+  #   assert delivers == 11
+  # end
+
+  test "given a bunch of direction and a robot santa should deliver presents between 2131 and 2359 houses" do
+    delivers = Adventofcode.Day03.delivers_with_robot("^><^>>>^<^v<v^^vv^><<^<><<vv^<>^<^v>^v")
+    assert delivers == 22
   end
 
 end
