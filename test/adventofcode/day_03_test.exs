@@ -16,4 +16,20 @@ defmodule Adventofcode.Day03Test do
     delivers = Adventofcode.Day03.delivers("^v^v^v^v^v")
     assert delivers == 2
   end
+
+  test "given a direction '^v' and a robot santa should deliver present to 3 houses" do
+    delivers = Adventofcode.Day03.delivers_with_robot("^v")
+    assert delivers == 3
+  end
+
+  test "given a direction '^>v<' and a robot santa should deliver present to 3 houses" do
+    delivers = Adventofcode.Day03.delivers_with_robot("^>v<")
+    assert delivers == 3
+  end
+
+  test "given a direction '^v^v^v^v^v' and a robot santa should deliver present to 3 houses" do
+    delivers = Adventofcode.Day03.delivers_with_robot("^v^v^v^v^v")
+    assert delivers == 11
+  end
+
 end

@@ -1,5 +1,34 @@
 defmodule Adventofcode.Day03 do
 
+  def delivers_with_robot(params) do
+    params
+    |> to_char_list
+    |> Enum.with_index
+    |> split_directions([])
+    |> calculate_for([:santa, :robot])
+    |> Enum.flat_map(fn(x) -> x end)
+    |> Enum.uniq
+    |> length
+  end
+
+  defp calculate_for(directions, keys) do
+    for key <- keys do
+      directions
+      |> Keyword.get_values(key)
+      |> add_starting_point
+      |> convert_to_coordinates
+      |> follow_directions([])
+    end
+  end
+
+  defp split_directions([], data), do: data
+  defp split_directions([{element, index} | rest], data) when rem(index, 2) == 0 do
+    split_directions(rest, [{:santa, element} | data])
+  end
+  defp split_directions([{element, _index} | rest], data) do
+    split_directions(rest, [{:robot, element} | data])
+  end
+
   def delivers(params) do
     params
     |> to_char_list
