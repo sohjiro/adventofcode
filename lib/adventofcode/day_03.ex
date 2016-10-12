@@ -10,8 +10,6 @@ defmodule Adventofcode.Day03 do
     |> calculate_for(:santa)
     |> Enum.uniq
 
-    IO.inspect santa
-
     robot = directions
     |> calculate_for(:robot)
     |> Enum.uniq
