@@ -13,4 +13,10 @@ defmodule Adventofcode.Day04Test do
     assert number == 1048970
     assert "00000" <> _rest = hash
   end
+
+  test "given a secret key 'yzbqklnj' should find a number that generate a hash with at least six 0s" do
+    {number, hash} = Adventofcode.Day04.hash_with_six_zeros("yzbqklnj")
+    assert number == 9962624
+    assert "000000" <> _rest = hash
+  end
 end
