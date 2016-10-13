@@ -3,24 +3,41 @@ defmodule Adventofcode.Day05 do
   @banned ["ab", "cd", "pq", "xy"]
 
   def nice_string?(string) do
-    string_split = String.split(string, "")
-
-    {vowels_count(string_split), twice_in_a_row(string_split), banned(string_split)}
+    string
+    |> String.split("")
+    |> apply_rules
   end
 
-  defp vowels_count(list), do: list |> Enum.count(fn(l) -> l in @vowels end)
+  defp apply_rules(list) do
+    vowels = vowels_count(list)
+    twice = twice_in_a_row(list)
+    banned = banned(list)
 
-  defp twice_in_a_row([]), do: false
-  defp twice_in_a_row([""]), do: false
-  defp twice_in_a_row([x, x | _rest]), do: true
+    case {vowels, twice, banned} do
+      {1, 1, 0} -> :nice
+      {_v, _t, _b} -> :naughty
+    end
+  end
+
+  defp vowels_count(list) do
+    vowels = Enum.count(list, fn(l) -> l in @vowels end)
+    case vowels > 2 do
+      true -> 1
+      false -> 0
+    end
+  end
+
+  defp twice_in_a_row([]), do: 0
+  defp twice_in_a_row([""]), do: 0
+  defp twice_in_a_row([x, x | _rest]), do: 1
   defp twice_in_a_row([_x, y | rest]), do: twice_in_a_row([y | rest])
 
-  defp banned([]), do: false
-  defp banned([""]), do: false
+  defp banned([]), do: 0
+  defp banned([""]), do: 0
   defp banned([x, y | rest]) do
     word = x <> y
     case word in @banned do
-      true -> true
+      true -> 1
       false -> banned([y | rest])
     end
   end
