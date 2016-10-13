@@ -9,7 +9,7 @@ defmodule Adventofcode.Day05 do
     |> Enum.count(fn(x) -> x == :nice end)
   end
 
-  def nice_string?(string) do
+  defp nice_string?(string) do
     string
     |> String.split("")
     |> apply_rules

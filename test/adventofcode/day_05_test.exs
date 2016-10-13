@@ -3,23 +3,23 @@ defmodule Adventofcode.Day05Test do
   doctest Adventofcode.Day05
 
   test "the string 'ugknbfddgicrmopn' is nice" do
-    result = Adventofcode.Day05.nice_string?("ugknbfddgicrmopn")
-    assert result == :nice
+    result = Adventofcode.Day05.count_nice_strings("ugknbfddgicrmopn")
+    assert result == 1
   end
 
   test "the string should not contain the strings ab, cd, pq, or xy" do
-    result = Adventofcode.Day05.nice_string?("haegwjzuvuyypxyu")
-    assert result == :naughty
+    result = Adventofcode.Day05.count_nice_strings("haegwjzuvuyypxyu")
+    assert result == 0
   end
 
   test "the string 'jchzalrnumimnmhp' should be naughty" do
-    result = Adventofcode.Day05.nice_string?("jchzalrnumimnmhp")
-    assert result == :naughty
+    result = Adventofcode.Day05.count_nice_strings("jchzalrnumimnmhp")
+    assert result == 0
   end
 
   test "the string 'dvszwmarrgswjxmb' should be naughty" do
-    result = Adventofcode.Day05.nice_string?("dvszwmarrgswjxmb")
-    assert result == :naughty
+    result = Adventofcode.Day05.count_nice_strings("dvszwmarrgswjxmb")
+    assert result == 0
   end
 
   test "given a list of strings should return the number of nice strings" do
