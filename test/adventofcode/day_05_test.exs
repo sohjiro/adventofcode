@@ -23,8 +23,8 @@ defmodule Adventofcode.Day05Test do
   end
 
   test "given a list of strings should return the number of nice strings" do
-    list = ["ugknbfddgicrmopn", "haegwjzuvuyypxyu", "jchzalrnumimnmhp", "dvszwmarrgswjxmb"]
-    result = Adventofcode.Day05.count_nice_strings(list)
+    strings = "ugknbfddgicrmopn\nhaegwjzuvuyypxyu\njchzalrnumimnmhp\ndvszwmarrgswjxmb"
+    result = Adventofcode.Day05.count_nice_strings(strings)
     assert result == 1
   end
 

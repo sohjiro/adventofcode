@@ -2,8 +2,9 @@ defmodule Adventofcode.Day05 do
   @vowels ["a", "e", "i", "o", "u"]
   @banned ["ab", "cd", "pq", "xy"]
 
-  def count_nice_strings(lists) do
-    lists
+  def count_nice_strings(strings) do
+    strings
+    |> String.split("\n")
     |> Enum.map(&nice_string?/1)
     |> Enum.count(fn(x) -> x == :nice end)
   end
