@@ -2,6 +2,8 @@ defmodule Adventofcode.Day04Test do
   use ExUnit.Case
   doctest Adventofcode.Day04
 
+  @moduletag :day_04
+
   test "given a secret key 'abcdef' should find a number that generate a hash with at least five 0s" do
     {number, hash} = Adventofcode.Day04.find_number("abcdef")
     assert number == 609043
