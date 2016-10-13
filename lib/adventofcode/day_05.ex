@@ -11,11 +11,18 @@ defmodule Adventofcode.Day05 do
   defp vowels_count(list), do: list |> Enum.count(fn(l) -> l in @vowels end)
 
   defp twice_in_a_row([]), do: false
+  defp twice_in_a_row([""]), do: false
   defp twice_in_a_row([x, x | _rest]), do: true
-  defp twice_in_a_row([_x, _y | rest]), do: twice_in_a_row(rest)
+  defp twice_in_a_row([_x, y | rest]), do: twice_in_a_row([y | rest])
 
-  defp banned(_list) do
-    false
+  defp banned([]), do: false
+  defp banned([""]), do: false
+  defp banned([x, y | rest]) do
+    word = x <> y
+    case word in @banned do
+      true -> true
+      false -> banned([y | rest])
+    end
   end
 
 end

@@ -14,6 +14,20 @@ defmodule Adventofcode.Day05Test do
 
   test "the string should not contain the strings ab, cd, pq, or xy" do
     {_vowels, _twice, banned} = Adventofcode.Day05.nice_string?("haegwjzuvuyypxyu")
+    assert banned
+  end
+
+  test "the string 'jchzalrnumimnmhp' should be naughty" do
+    {vowels, twice, banned} = Adventofcode.Day05.nice_string?("jchzalrnumimnmhp")
+    assert vowels > 2
+    refute twice
+    refute banned
+  end
+
+  test "the string 'dvszwmarrgswjxmb' should be naughty" do
+    {vowels, twice, banned} = Adventofcode.Day05.nice_string?("dvszwmarrgswjxmb")
+    refute vowels > 2
+    assert twice
     refute banned
   end
 
