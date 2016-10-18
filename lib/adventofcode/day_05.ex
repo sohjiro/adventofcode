@@ -2,6 +2,17 @@ defmodule Adventofcode.Day05 do
   @vowels ["a", "e", "i", "o", "u"]
   @banned ["ab", "cd", "pq", "xy"]
 
+  def new_nice_string(strings) do
+    strings
+    |> String.split("\n")
+    |> map_tuple
+  end
+
+  defp map_tuple(strings) do
+    string
+    |> String.split("")
+  end
+
   def count_nice_strings(strings) do
     strings
     |> String.split("\n")
