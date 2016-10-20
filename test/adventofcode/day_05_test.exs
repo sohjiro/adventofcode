@@ -29,13 +29,10 @@ defmodule Adventofcode.Day05Test do
   end
 
   test "given the string 'qjhvhtzxzqqjkmpb' return a list of tuples of combining the letters with his next" do
-    [{string, twice, thrice}] = Adventofcode.Day05.new_nice_string("qjhvhtzxzqqjkmpb")
+    [{string, result}] = Adventofcode.Day05.new_nice_string("qjhvhtzxzqqjkmpb")
 
     assert "qjhvhtzxzqqjkmpb" == string
-
-    assert [{?p,?b},{?m,?p},{?k,?m},{?j,?k},{?q,?j},{?q,?q},{?z,?q},{?x,?z},{?z,?x},{?t,?z},{?h,?t},{?v,?h},{?h,?v},{?j,?h},{?q,?j}] == twice
-
-    assert [{?m, ?p, ?b},{?k, ?m, ?p},{?j, ?k, ?m},{?q, ?j, ?k},{?q, ?q, ?j},{?z, ?q, ?q},{?x, ?z, ?q},{?z, ?x, ?z},{?t, ?z, ?x},{?h, ?t, ?z},{?v, ?h, ?t},{?h, ?v, ?h},{?j, ?h, ?v},{?q, ?j, ?h}] == thrice
+    assert result == :nice
   end
 
 end
