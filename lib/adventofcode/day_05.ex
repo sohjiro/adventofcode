@@ -10,13 +10,9 @@ defmodule Adventofcode.Day05 do
 
   defp map_tuple([], conversion), do: conversion
   defp map_tuple([string | rest], conversion) do
-    twice = string
-            |> to_char_list
-            |> combine_twice_letters([])
-
-    thrice = string
-             |> to_char_list
-             |> combine_three_letters([])
+    charlist = to_char_list(string)
+    twice = combine_twice_letters(charlist, [])
+    thrice = combine_three_letters(charlist, [])
 
     map_tuple(rest, [{string, twice, thrice} | conversion])
   end
