@@ -17,7 +17,7 @@ defmodule Adventofcode.Day05 do
     map_tuple(rest, [{string, twice} | conversion])
   end
 
-  defp combine_twice_letters([_], list), do: list |> Enum.reverse
+  defp combine_twice_letters([_], list), do: list
   defp combine_twice_letters([a, b | rest], list), do: combine_twice_letters([b | rest], [{a, b} | list])
 
   def count_nice_strings(strings) do
