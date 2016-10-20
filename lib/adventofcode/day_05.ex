@@ -8,10 +8,14 @@ defmodule Adventofcode.Day05 do
     |> map_tuple
   end
 
-  defp map_tuple(strings) do
+  defp map_tuple([string | _rest]) do
     string
-    |> String.split("")
+    |> to_char_list
+    |> convert_to_tupple([])
   end
+
+  defp convert_to_tupple([_], list), do: list |> Enum.reverse
+  defp convert_to_tupple([a, b | rest], list), do: convert_to_tupple([b | rest], [{a, b} | list])
 
   def count_nice_strings(strings) do
     strings

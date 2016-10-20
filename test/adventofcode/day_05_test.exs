@@ -29,7 +29,7 @@ defmodule Adventofcode.Day05Test do
   end
 
   test "given the string 'qjhvhtzxzqqjkmpb' return a list of tuples of combining the letters with his next" do
-    result = Adventofcode.Day05.new_nice_string("qjhvhtzxzqqjkmpb")
+    [{string, result}] = Adventofcode.Day05.new_nice_string("qjhvhtzxzqqjkmpb")
     assert [{?q,?j},{?j,?h},{?h,?v},{?v,?h},{?h,?t},{?t,?z},{?z,?x},{?x,?z},{?z,?q},{?q,?q},{?q,?j},{?j,?k},{?k,?m},{?m,?p},{?p,?b}] == result
   end
 
