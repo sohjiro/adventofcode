@@ -5,13 +5,16 @@ defmodule Adventofcode.Day05 do
   def new_nice_string(strings) do
     strings
     |> String.split("\n")
-    |> map_tuple
+    |> map_tuple([])
   end
 
-  defp map_tuple([string | _rest]) do
-    string
-    |> to_char_list
-    |> convert_to_tupple([])
+  defp map_tuple([], conversion), do: conversion
+  defp map_tuple([string | rest], conversion) do
+    data = string
+           |> to_char_list
+           |> convert_to_tupple([])
+
+    map_tuple(rest, [{string, data} | conversion])
   end
 
   defp convert_to_tupple([_], list), do: list |> Enum.reverse
