@@ -12,13 +12,13 @@ defmodule Adventofcode.Day05 do
   defp map_tuple([string | rest], conversion) do
     data = string
            |> to_char_list
-           |> convert_to_tupple([])
+           |> combine_twice_letters([])
 
     map_tuple(rest, [{string, data} | conversion])
   end
 
-  defp convert_to_tupple([_], list), do: list |> Enum.reverse
-  defp convert_to_tupple([a, b | rest], list), do: convert_to_tupple([b | rest], [{a, b} | list])
+  defp combine_twice_letters([_], list), do: list |> Enum.reverse
+  defp combine_twice_letters([a, b | rest], list), do: combine_twice_letters([b | rest], [{a, b} | list])
 
   def count_nice_strings(strings) do
     strings
