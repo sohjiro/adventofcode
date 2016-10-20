@@ -10,11 +10,11 @@ defmodule Adventofcode.Day05 do
 
   defp map_tuple([], conversion), do: conversion
   defp map_tuple([string | rest], conversion) do
-    data = string
-           |> to_char_list
-           |> combine_twice_letters([])
+    twice = string
+            |> to_char_list
+            |> combine_twice_letters([])
 
-    map_tuple(rest, [{string, data} | conversion])
+    map_tuple(rest, [{string, twice} | conversion])
   end
 
   defp combine_twice_letters([_], list), do: list |> Enum.reverse
