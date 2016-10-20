@@ -14,11 +14,18 @@ defmodule Adventofcode.Day05 do
             |> to_char_list
             |> combine_twice_letters([])
 
-    map_tuple(rest, [{string, twice} | conversion])
+    thrice = string
+             |> to_char_list
+             |> combine_three_letters([])
+
+    map_tuple(rest, [{string, twice, thrice} | conversion])
   end
 
   defp combine_twice_letters([_], list), do: list
   defp combine_twice_letters([a, b | rest], list), do: combine_twice_letters([b | rest], [{a, b} | list])
+
+  defp combine_three_letters([_, _], list), do: list
+  defp combine_three_letters([a, b, c | rest], list), do: combine_three_letters([b, c | rest], [{a, b, c} | list])
 
   def count_nice_strings(strings) do
     strings
