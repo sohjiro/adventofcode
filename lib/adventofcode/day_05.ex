@@ -24,23 +24,37 @@ defmodule Adventofcode.Day05 do
   defp combine_three_letters([_, _], list), do: list
   defp combine_three_letters([a, b, c | rest], list), do: combine_three_letters([b, c | rest], [{a, b, c} | list])
 
-  defp apply_rules([{string, twice, _thrice} | _rest], _results) do
-    {string, twice?(twice), overlaps?}
+  defp apply_rules([], results), do: results
+  defp apply_rules([{string, twice, thrice} | rest], results) do
+    apply_rules(rest, [{string, twice?(twice), overlaps?(thrice)} | results])
   end
 
   defp overlaps?(words) do
+    case map_thrice(words, %{}) do
+      %{overlaps: _x} -> true
+      _ -> false
+    end
   end
+
+  defp map_thrice([], counted), do: counted
+  defp map_thrice([{a, a, a} | rest], counted) do
+    map_thrice(rest, Map.update(counted, :overlaps, 1, &(&1 + 1)))
+  end
+  defp map_thrice([{a, _b, a} | rest], counted) do
+    map_thrice(rest, Map.update(counted, :repeats, 1, &(&1 + 1)))
+  end
+  defp map_thrice([_data | rest], counted), do: map_thrice(rest, counted)
 
   defp twice?(words) do
     words
-    |> count_words(%{})
+    |> map_twice(%{})
     |> Enum.filter(fn({_k, v}) -> v > 1 end)
     |> length
   end
 
-  defp count_words([], counted), do: counted
-  defp count_words([{a, b} | rest], counted) do
-    count_words(rest, Map.update(counted, [a,b], 1, &(&1 + 1)))
+  defp map_twice([], counted), do: counted
+  defp map_twice([{a, b} | rest], counted) do
+    map_twice(rest, Map.update(counted, [a,b], 1, &(&1 + 1)))
   end
 
   def count_nice_strings(strings) do
