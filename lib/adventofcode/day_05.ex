@@ -6,6 +6,7 @@ defmodule Adventofcode.Day05 do
     strings
     |> String.split("\n")
     |> map_tuple([])
+    |> apply_rules([])
   end
 
   defp map_tuple([], conversion), do: conversion
@@ -22,6 +23,25 @@ defmodule Adventofcode.Day05 do
 
   defp combine_three_letters([_, _], list), do: list
   defp combine_three_letters([a, b, c | rest], list), do: combine_three_letters([b, c | rest], [{a, b, c} | list])
+
+  defp apply_rules([{string, twice, _thrice} | _rest], _results) do
+    {string, twice?(twice), overlaps?}
+  end
+
+  defp overlaps?(words) do
+  end
+
+  defp twice?(words) do
+    words
+    |> count_words(%{})
+    |> Enum.filter(fn({_k, v}) -> v > 1 end)
+    |> length
+  end
+
+  defp count_words([], counted), do: counted
+  defp count_words([{a, b} | rest], counted) do
+    count_words(rest, Map.update(counted, [a,b], 1, &(&1 + 1)))
+  end
 
   def count_nice_strings(strings) do
     strings
