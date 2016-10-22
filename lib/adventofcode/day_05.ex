@@ -2,6 +2,12 @@ defmodule Adventofcode.Day05 do
   @vowels ["a", "e", "i", "o", "u"]
   @banned ["ab", "cd", "pq", "xy"]
 
+  def count_new_nice_strings(strings) do
+    strings
+    |> new_nice_string
+    |> Enum.count(fn({_string, x}) -> x == :nice end)
+  end
+
   def new_nice_string(strings) do
     strings
     |> String.split("\n")
@@ -25,14 +31,21 @@ defmodule Adventofcode.Day05 do
   defp combine_three_letters([a, b, c | rest], list), do: combine_three_letters([b, c | rest], [{a, b, c} | list])
 
   defp apply_rules([], results), do: results
-  defp apply_rules([{string, twice, thrice} | rest], results) do
-    apply_rules(rest, [{string, twice?(twice), overlaps?(thrice)} | results])
+  defp apply_rules([{string, list, thrice} | rest], results) do
+    result = case {twice?(list), overlaps?(thrice)} do
+      {0, _} -> :naughty
+      {_, true} -> :naughty
+      {_, false} -> :nice
+    end
+    apply_rules(rest, [{string, result} | results])
   end
 
   defp overlaps?(words) do
     case map_thrice(words, %{}) do
+      %{overlaps: _x, repeats: _} -> true
       %{overlaps: _x} -> true
-      _ -> false
+      %{repeats: _} -> false
+      _ -> true
     end
   end
 

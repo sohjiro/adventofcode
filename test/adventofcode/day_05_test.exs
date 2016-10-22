@@ -28,11 +28,38 @@ defmodule Adventofcode.Day05Test do
     assert result == 1
   end
 
-  test "given the string 'qjhvhtzxzqqjkmpb' return a list of tuples of combining the letters with his next" do
-    [{string, 1, words}] = Adventofcode.Day05.new_nice_string("qjhvhtzxzqqjkmpb")
+  test "The string 'qjhvhtzxzqqjkmpb' should be nice" do
+    [{string, result}] = Adventofcode.Day05.new_nice_string("qjhvhtzxzqqjkmpb")
 
     assert "qjhvhtzxzqqjkmpb" == string
-    refute words
+    assert result == :nice
+  end
+
+  test "The string 'xxyxx' should be nice" do
+    [{string, result}] = Adventofcode.Day05.new_nice_string("xxyxx")
+
+    assert "xxyxx" == string
+    assert result == :nice
+  end
+
+  test "The string 'uurcxstgmygtbstg' should be naughty" do
+    [{string, result}] = Adventofcode.Day05.new_nice_string("uurcxstgmygtbstg")
+
+    assert "uurcxstgmygtbstg" == string
+    assert result == :naughty
+  end
+
+  test "The string 'ieodomkazucvgmuy' should be naughty" do
+    [{string, result}] = Adventofcode.Day05.new_nice_string("ieodomkazucvgmuy")
+
+    assert "ieodomkazucvgmuy" == string
+    assert result == :naughty
+  end
+
+  test "given a list of strings should return the number of new nice strings" do
+    strings = "qjhvhtzxzqqjkmpb\nxxyxx\nuurcxstgmygtbstg\nieodomkazucvgmuy"
+    result = Adventofcode.Day05.count_new_nice_strings(strings)
+    assert result == 2
   end
 
 end
