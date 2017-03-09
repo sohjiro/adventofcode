@@ -60,4 +60,9 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == 12
   end
 
+  test "Given an R8 direction should convert into complete coordinates" do
+    result = Adventofcode.Seventeen.Day01.complete_coordinates "R8"
+    assert result == [{8, 0}, {7, 0}, {6, 0}, {5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}]
+  end
+
 end
