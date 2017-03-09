@@ -10,6 +10,7 @@ defmodule Adventofcode.Seventeen.Day01 do
   def calculate_first_interception(instructions) do
     instructions
     |> trace_walk
+    |> Enum.reverse
     |> find_first_coincidence([])
   end
 
