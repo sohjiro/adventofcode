@@ -10,23 +10,20 @@ defmodule Adventofcode.Seventeen.Day01 do
     instructions
     |> String.split(", ")
     |> Enum.map(&parse_string/1)
-    |> expand_walk_from(:north, [])
+    |> expand_walk_from(:north, [@initial_point])
+    |> IO.inspect
   end
 
   defp expand_walk_from([], _view, acc), do: acc
-  defp expand_walk_from([{direction, blocks} | rest], view, []) do
+  defp expand_walk_from([{direction, blocks} | rest], view, [{x, y} | _next] = acc) do
     {to, x1, y1} = calculate_direction(direction, view)
-    {new_x, new_y} = {blocks * x1, blocks * y1}
-    missing_points = generate_middle_points(0..new_x, 0..new_y) |> Enum.reverse
-    expand_walk_from(rest, to, missing_points)
+    {new_x, new_y} = {x + (blocks * x1), y + (blocks * y1)}
+    missing_points = generate_middle_points(x..new_x, y..new_y) |> remove_last({x, y}) |> Enum.reverse
+    expand_walk_from(rest, to, missing_points ++ acc)
   end
-  # defp expand_walk_from([{direction, blocks} | rest], view, [{x, y} | _next] = acc) do
-  #   {to, x1, y1} = calculate_direction(direction, view)
-  #   {new_x, new_y} = {x + (blocks * x1), y + (blocks * y1)}
-  #   missing_points = generate_middle_points(x..new_x, y..new_y)
-  #   IO.inspect missing_points
-  #   expand_walk_from(rest, to, acc ++ missing_points)
-  # end
+
+  defp remove_last([{x, y} | rest], {x, y}), do: rest
+  defp remove_last(data, _elements), do: data
 
   defp generate_middle_points(x_points, y_points), do: for x <- x_points, y <- y_points, do: {x, y}
 
