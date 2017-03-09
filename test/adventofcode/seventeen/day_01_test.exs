@@ -11,14 +11,19 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == {0, 2}
   end
 
-  test "Given an R2, L3 direction should convert into a coordinate" do
-    result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2, L3"
-    assert result == {2, 3}
+  test "Given an R2, R2 direction should convert into coordinates" do
+    result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2, R2"
+    assert result == [{0, 0}, {2, 0}, {2, -2}]
   end
 
-  test "Given an R2, R2 direction should convert into a coordinate" do
-    result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2, R2"
-    assert result == {2, -2}
+  test "Given an R2, R2, R2 direction should convert into coordinates" do
+    result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2, R2, R2"
+    assert result == [{0, 0}, {2, 0}, {2, -2}, {0, -2}]
+  end
+
+  test "Given an R2, L3 direction should convert into a coordinate" do
+    result = Adventofcode.Seventeen.Day01.calculate_final_coordinate [{0, 0}, {2, 0}, {2, 3}]
+    assert result == {2, 3}
   end
 
   test "Given an R2, L3 direction should calculate distance blocks" do
