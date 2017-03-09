@@ -5,7 +5,6 @@ defmodule Adventofcode.Seventeen.Day01 do
     instructions
     |> calculate_coordinates
     |> calculate_final_coordinate
-    |> IO.inspect
     |> taxicab
   end
 

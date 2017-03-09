@@ -55,14 +55,19 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == {10, 2}
   end
 
-  # test "Given an R2, L3 direction should calculate distance blocks" do
-  #   result = Adventofcode.Seventeen.Day01.calculate_blocks "R2, L3"
-  #   assert result == 5
-  # end
+  test "Given an R2, L3 direction should calculate distance blocks" do
+    result = Adventofcode.Seventeen.Day01.calculate_blocks "R2, L3"
+    assert result == 5
+  end
 
-  # test "Given an R5, L5, R5, R3 direction should calculate distance blocks" do
-  #   result = Adventofcode.Seventeen.Day01.calculate_blocks "R5, L5, R5, R3"
-  #   assert result == 12
-  # end
+  test "Given an R2, R2, R2 direction should calculate distance blocks" do
+    result = Adventofcode.Seventeen.Day01.calculate_blocks "R2, R2, R2"
+    assert result == 2
+  end
+
+  test "Given an R5, L5, R5, R3 direction should calculate distance blocks" do
+    result = Adventofcode.Seventeen.Day01.calculate_blocks "R5, L5, R5, R3"
+    assert result == 12
+  end
 
 end
