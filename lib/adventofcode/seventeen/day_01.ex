@@ -8,8 +8,6 @@ defmodule Adventofcode.Seventeen.Day01 do
     |> taxicab
   end
 
-  def calculate_final_coordinate(coordinates), do: coordinates |> hd
-
   def calculate_coordinates(instructions) do
     instructions
     |> String.split(", ")
@@ -19,31 +17,28 @@ defmodule Adventofcode.Seventeen.Day01 do
 
   defp calculate_direction(direction, view) do
     cond do
-      {direction, view} in [{?R, :north}, {?L, :south}] -> :east
-      {direction, view} in [{?R, :south}, {?L, :north}] -> :west
-      {direction, view} in [{?R, :east}, {?L, :west}] -> :south
-      {direction, view} in [{?R, :west}, {?L, :east}] -> :north
+      {direction, view} in [{?R, :north}, {?L, :south}] -> {:east, 1, 0}
+      {direction, view} in [{?R, :south}, {?L, :north}] -> {:west, -1, 0}
+      {direction, view} in [{?R, :east}, {?L, :west}] -> {:south, 0, -1}
+      {direction, view} in [{?R, :west}, {?L, :east}] -> {:north, 0, 1}
       true -> {:error}
     end
   end
 
   defp walk_from([], _view, acc), do: acc
   defp walk_from([{direction, blocks} | rest], view, [{x, y} | _next] = acc) do
-    case calculate_direction(direction, view) do
-      :east -> walk_from(rest, :east, [{x + blocks, y} | acc])
-      :west -> walk_from(rest, :west, [{x - blocks, y} | acc])
-      :south -> walk_from(rest, :south, [{x, y - blocks} | acc])
-      :north -> walk_from(rest, :north, [{x, y + blocks} | acc])
-    end
+    {to, x1, y1} = calculate_direction(direction, view)
+    {x, y} = {x + (blocks * x1), y + (blocks * y1)}
+    walk_from(rest, to, [{x, y} | acc])
   end
 
   defp parse_string(data), do: data |> to_charlist |> parse_charlist
   defp parse_charlist([direction | blocks]), do: {direction, to_int(blocks)}
   defp to_int(char), do: char |> to_string |> String.to_integer
+  def calculate_final_coordinate(coordinates), do: coordinates |> hd
 
   defp taxicab({q1, q2}) do
     {p1, p2} = @initial_point
     abs(p1 - q1) + abs(p2 - q2)
   end
-
 end
