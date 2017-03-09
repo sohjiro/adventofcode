@@ -9,7 +9,7 @@ defmodule Adventofcode.Seventeen.Day01 do
     |> taxicab
   end
 
-  def calculate_final_coordinate(coordinates), do: coordinates |> Enum.reverse |> hd
+  def calculate_final_coordinate(coordinates), do: coordinates |> hd
 
   def calculate_coordinates(instructions) do
     instructions

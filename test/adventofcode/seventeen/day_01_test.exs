@@ -50,10 +50,10 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == [{10, 2}, {10, 5}, {5, 5}, {5, 0}, {0, 0}]
   end
 
-  # test "Given an R2, L3 direction should convert into a coordinate" do
-  #   result = Adventofcode.Seventeen.Day01.calculate_final_coordinate [{0, 0}, {2, 0}, {2, 3}]
-  #   assert result == {2, 3}
-  # end
+  test "Given an R2, L3 direction should convert into a coordinate" do
+    result = Adventofcode.Seventeen.Day01.calculate_final_coordinate [{10, 2}, {10, 5}, {5, 5}, {5, 0}, {0, 0}]
+    assert result == {10, 2}
+  end
 
   # test "Given an R2, L3 direction should calculate distance blocks" do
   #   result = Adventofcode.Seventeen.Day01.calculate_blocks "R2, L3"
