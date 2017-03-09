@@ -5,6 +5,7 @@ defmodule Adventofcode.Seventeen.Day01 do
     instructions
     |> calculate_coordinates
     |> calculate_final_coordinate
+    |> IO.inspect
     |> taxicab
   end
 
@@ -19,29 +20,13 @@ defmodule Adventofcode.Seventeen.Day01 do
 
   defp convert_into_coordinates(coordinates) do
     coordinates
-    |> walk_on(:x, [@initial_point])
+    |> walk_on(:north, [@initial_point])
   end
 
-  defp walk_on([], _axis, acc), do: acc |> Enum.reverse
-
-  defp walk_on([[?R | blocks] | rest], :x, [{0, y} | _next] = acc) do
-    walk_on(rest, :y, [{0 + to_int(blocks), y} | acc])
-  end
-
-  defp walk_on([[?R | blocks] | rest], :x, [{x, y} | _next] = acc) when x > 0 do
-    walk_on(rest, :y, [{x - to_int(blocks), y} | acc])
-  end
-
-  defp walk_on([[?L | blocks] | rest], :x, [{x, y} | _next] = acc) do
-    walk_on(rest, :y, [{x - to_int(blocks), y} | acc])
-  end
-
-  defp walk_on([[?R | blocks] | rest], :y, [{x, y} | _next] = acc) do
-    walk_on(rest, :x, [{x, y - to_int(blocks)} | acc])
-  end
-
-  defp walk_on([[?L | blocks] | rest], :y, [{x, y} | _next] = acc) do
-    walk_on(rest, :x, [{x, y + to_int(blocks)} | acc])
+  defp walk_on([], _view, acc), do: acc
+  defp walk_on([[?R | blocks] | rest], :north, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :east, [{x + number, y} | acc])
   end
 
   def convert_into_coordinate(direction) do
