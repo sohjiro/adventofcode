@@ -14,60 +14,28 @@ defmodule Adventofcode.Seventeen.Day01 do
     instructions
     |> String.split(", ")
     |> Enum.map(&to_charlist/1)
-    |> convert_into_coordinates
-  end
-
-  defp convert_into_coordinates(coordinates) do
-    coordinates
     |> walk_on(:north, [@initial_point])
   end
 
   defp walk_on([], _view, acc), do: acc
-
-  defp walk_on([[?R | blocks] | rest], :north, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :east, [{x + number, y} | acc])
+  defp walk_on([[?R | blocks] | rest], view, [{x, y} | _next] = acc) do
+    number_blocks = to_int(blocks)
+    case view do
+      :north -> walk_on(rest, :east, [{x + number_blocks, y} | acc])
+      :south -> walk_on(rest, :west, [{x - number_blocks, y} | acc])
+      :east -> walk_on(rest, :south, [{x, y - number_blocks} | acc])
+      :west -> walk_on(rest, :north, [{x, y + number_blocks} | acc])
+    end
   end
-  defp walk_on([[?L | blocks] | rest], :north, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :west, [{x - number, y} | acc])
+  defp walk_on([[?L | blocks] | rest], view, [{x, y} | _next] = acc) do
+    number_blocks = to_int(blocks)
+    case view do
+      :north -> walk_on(rest, :west, [{x - number_blocks, y} | acc])
+      :south -> walk_on(rest, :east, [{x + number_blocks, y} | acc])
+      :east -> walk_on(rest, :north, [{x, y + number_blocks} | acc])
+      :west -> walk_on(rest, :south, [{x, y - number_blocks} | acc])
+    end
   end
-
-  defp walk_on([[?R | blocks] | rest], :east, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :south, [{x, y - number} | acc])
-  end
-  defp walk_on([[?L | blocks] | rest], :east, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :north, [{x, y + number} | acc])
-  end
-
-  defp walk_on([[?R | blocks] | rest], :west, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :north, [{x, y + number} | acc])
-  end
-  defp walk_on([[?L | blocks] | rest], :west, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :south, [{x, y - number} | acc])
-  end
-
-  defp walk_on([[?R | blocks] | rest], :south, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :west, [{x - number, y} | acc])
-  end
-  defp walk_on([[?L | blocks] | rest], :south, [{x, y} | _path] = acc) do
-    number = to_int(blocks)
-    walk_on(rest, :east, [{x + number, y} | acc])
-  end
-
-  def convert_into_coordinate(direction) do
-    direction
-    |> to_charlist
-    |> map_direction
-  end
-
-  defp map_direction([?R | blocks]), do: {to_int((blocks)), 0}
-  defp map_direction([?L | blocks]), do: {0, to_int(blocks)}
   defp to_int(char), do: char |> to_string |> String.to_integer
 
 
