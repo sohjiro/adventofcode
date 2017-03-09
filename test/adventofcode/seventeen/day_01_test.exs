@@ -15,6 +15,10 @@ defmodule Adventofcode.Seventeen.Day01Test do
     result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2"
     assert result == [{2, 0}, {0, 0}]
   end
+  test "Given an L2 direction should convert into coordinates" do
+    result = Adventofcode.Seventeen.Day01.calculate_coordinates "L2"
+    assert result == [{-2, 0}, {0, 0}]
+  end
 
   test "Given an R2 R2 direction should convert into coordinates" do
     result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2, R2"
