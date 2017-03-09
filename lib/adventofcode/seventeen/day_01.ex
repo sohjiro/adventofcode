@@ -13,31 +13,31 @@ defmodule Adventofcode.Seventeen.Day01 do
   def calculate_coordinates(instructions) do
     instructions
     |> String.split(", ")
-    |> Enum.map(&to_charlist/1)
+    |> Enum.map(&parse_string/1)
     |> walk_from(:north, [@initial_point])
   end
 
   defp walk_from([], _view, acc), do: acc
-  defp walk_from([[?R | blocks] | rest], view, [{x, y} | _next] = acc) do
-    number_blocks = to_int(blocks)
+  defp walk_from([{?R, blocks} | rest], view, [{x, y} | _next] = acc) do
     case view do
-      :north -> walk_from(rest, :east, [{x + number_blocks, y} | acc])
-      :south -> walk_from(rest, :west, [{x - number_blocks, y} | acc])
-      :east -> walk_from(rest, :south, [{x, y - number_blocks} | acc])
-      :west -> walk_from(rest, :north, [{x, y + number_blocks} | acc])
+      :north -> walk_from(rest, :east, [{x + blocks, y} | acc])
+      :south -> walk_from(rest, :west, [{x - blocks, y} | acc])
+      :east -> walk_from(rest, :south, [{x, y - blocks} | acc])
+      :west -> walk_from(rest, :north, [{x, y + blocks} | acc])
     end
   end
-  defp walk_from([[?L | blocks] | rest], view, [{x, y} | _next] = acc) do
-    number_blocks = to_int(blocks)
+  defp walk_from([{?L, blocks} | rest], view, [{x, y} | _next] = acc) do
     case view do
-      :north -> walk_from(rest, :west, [{x - number_blocks, y} | acc])
-      :south -> walk_from(rest, :east, [{x + number_blocks, y} | acc])
-      :east -> walk_from(rest, :north, [{x, y + number_blocks} | acc])
-      :west -> walk_from(rest, :south, [{x, y - number_blocks} | acc])
+      :north -> walk_from(rest, :west, [{x - blocks, y} | acc])
+      :south -> walk_from(rest, :east, [{x + blocks, y} | acc])
+      :east -> walk_from(rest, :north, [{x, y + blocks} | acc])
+      :west -> walk_from(rest, :south, [{x, y - blocks} | acc])
     end
   end
-  defp to_int(char), do: char |> to_string |> String.to_integer
 
+  defp parse_string(data), do: data |> to_charlist |> parse_charlist
+  defp parse_charlist([direction | blocks]), do: {direction, to_int(blocks)}
+  defp to_int(char), do: char |> to_string |> String.to_integer
 
   defp taxicab({q1, q2}) do
     {p1, p2} = @initial_point
