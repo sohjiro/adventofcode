@@ -70,4 +70,19 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == [ {8, -4}, {8, -3}, {8, -2}, {8, -1}, {8, 0}, {7, 0}, {6, 0}, {5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}]
   end
 
+  test "Given an R8, R4, R4 direction should convert into complete coordinates" do
+    result = Adventofcode.Seventeen.Day01.trace_walk "R8, R4, R4"
+    assert result == [ {4, -4}, {5, -4}, {6, -4}, {7, -4}, {8, -4}, {8, -3}, {8, -2}, {8, -1}, {8, 0}, {7, 0}, {6, 0}, {5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}]
+  end
+
+  test "Given an R8, R4, R4, R8 direction should convert into complete coordinates" do
+    result = Adventofcode.Seventeen.Day01.trace_walk "R8, R4, R4, R8"
+    assert result == [ {4, 4}, {4, 3}, {4, 2}, {4, 1}, {4, 0}, {4, -1}, {4, -2}, {4, -3}, {4, -4}, {5, -4}, {6, -4}, {7, -4}, {8, -4}, {8, -3}, {8, -2}, {8, -1}, {8, 0}, {7, 0}, {6, 0}, {5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}]
+  end
+
+  test "Given an R2, R2, R2 direction should calculate first interception" do
+    result = Adventofcode.Seventeen.Day01.calculate_first_interception "R8, R4, R4, R8"
+    assert result == {4, 0}
+  end
+
 end

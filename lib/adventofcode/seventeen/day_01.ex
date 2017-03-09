@@ -1,5 +1,17 @@
 defmodule Adventofcode.Seventeen.Day01 do
   @initial_point {0, 0}
+  def calculate_first_interception(instructions) do
+    instructions
+    |> trace_walk
+    |> find_first_coincidence([])
+  end
+
+  defp find_first_coincidence([point | rest], acc) do
+    case point in acc do
+      false -> find_first_coincidence(rest, [point | acc])
+      true -> point
+    end
+  end
 
   def trace_walk(instructions) do
     instructions
