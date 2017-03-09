@@ -23,11 +23,6 @@ defmodule Adventofcode.Seventeen.Day01 do
 
   def trace_walk(instructions) do
     instructions
-    |> trace_coordinates
-  end
-
-  def trace_coordinates(instructions) do
-    instructions
     |> String.split(", ")
     |> Enum.map(&parse_string/1)
     |> expand_walk_from(:north, [@initial_point])
