@@ -85,4 +85,9 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == {4, 0}
   end
 
+  test "Given an R8, R4, R4, R8 direction should calculate distance blocks" do
+    result = Adventofcode.Seventeen.Day01.calculate_distance_with_interception "R8, R4, R4, R8"
+    assert result == 4
+  end
+
 end

@@ -1,5 +1,12 @@
 defmodule Adventofcode.Seventeen.Day01 do
   @initial_point {0, 0}
+
+  def calculate_distance_with_interception(instructions) do
+    instructions
+    |> calculate_first_interception
+    |> taxicab
+  end
+
   def calculate_first_interception(instructions) do
     instructions
     |> trace_walk
@@ -23,7 +30,6 @@ defmodule Adventofcode.Seventeen.Day01 do
     |> String.split(", ")
     |> Enum.map(&parse_string/1)
     |> expand_walk_from(:north, [@initial_point])
-    |> IO.inspect
   end
 
   defp expand_walk_from([], _view, acc), do: acc
