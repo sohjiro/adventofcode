@@ -17,21 +17,23 @@ defmodule Adventofcode.Seventeen.Day01 do
     |> walk_from(:north, [@initial_point])
   end
 
-  defp walk_from([], _view, acc), do: acc
-  defp walk_from([{?R, blocks} | rest], view, [{x, y} | _next] = acc) do
-    case view do
-      :north -> walk_from(rest, :east, [{x + blocks, y} | acc])
-      :south -> walk_from(rest, :west, [{x - blocks, y} | acc])
-      :east -> walk_from(rest, :south, [{x, y - blocks} | acc])
-      :west -> walk_from(rest, :north, [{x, y + blocks} | acc])
+  defp calculate_direction(direction, view) do
+    cond do
+      {direction, view} in [{?R, :north}, {?L, :south}] -> :east
+      {direction, view} in [{?R, :south}, {?L, :north}] -> :west
+      {direction, view} in [{?R, :east}, {?L, :west}] -> :south
+      {direction, view} in [{?R, :west}, {?L, :east}] -> :north
+      true -> {:error}
     end
   end
-  defp walk_from([{?L, blocks} | rest], view, [{x, y} | _next] = acc) do
-    case view do
-      :north -> walk_from(rest, :west, [{x - blocks, y} | acc])
-      :south -> walk_from(rest, :east, [{x + blocks, y} | acc])
-      :east -> walk_from(rest, :north, [{x, y + blocks} | acc])
-      :west -> walk_from(rest, :south, [{x, y - blocks} | acc])
+
+  defp walk_from([], _view, acc), do: acc
+  defp walk_from([{direction, blocks} | rest], view, [{x, y} | _next] = acc) do
+    case calculate_direction(direction, view) do
+      :east -> walk_from(rest, :east, [{x + blocks, y} | acc])
+      :west -> walk_from(rest, :west, [{x - blocks, y} | acc])
+      :south -> walk_from(rest, :south, [{x, y - blocks} | acc])
+      :north -> walk_from(rest, :north, [{x, y + blocks} | acc])
     end
   end
 
