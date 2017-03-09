@@ -29,6 +29,11 @@ defmodule Adventofcode.Seventeen.Day01 do
     walk_on(rest, :east, [{x + number, y} | acc])
   end
 
+  defp walk_on([[?R | blocks] | rest], :east, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :south, [{x, y - number} | acc])
+  end
+
   def convert_into_coordinate(direction) do
     direction
     |> to_charlist
