@@ -43,6 +43,15 @@ defmodule Adventofcode.Seventeen.Day01 do
     walk_on(rest, :north, [{x, y + number} | acc])
   end
 
+  defp walk_on([[?R | blocks] | rest], :west, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :north, [{x, y + number} | acc])
+  end
+  defp walk_on([[?L | blocks] | rest], :west, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :south, [{x, y - number} | acc])
+  end
+
   defp walk_on([[?R | blocks] | rest], :south, [{x, y} | _path] = acc) do
     number = to_int(blocks)
     walk_on(rest, :west, [{x - number, y} | acc])
