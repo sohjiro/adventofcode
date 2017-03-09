@@ -43,6 +43,10 @@ defmodule Adventofcode.Seventeen.Day01 do
     number = to_int(blocks)
     walk_on(rest, :south, [{x - number, y} | acc])
   end
+  defp walk_on([[?L | blocks] | rest], :south, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :south, [{x + number, y} | acc])
+  end
 
   def convert_into_coordinate(direction) do
     direction
