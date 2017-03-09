@@ -1,4 +1,11 @@
 defmodule Adventofcode.Seventeen.Day01 do
+  @initial_point {0, 0}
+
+  def calculate_blocks(instructions) do
+    instructions
+    |> calculate_coordinates
+    |> taxicab
+  end
 
   def calculate_coordinates(instructions) do
     instructions
@@ -20,10 +27,15 @@ defmodule Adventofcode.Seventeen.Day01 do
   defp calculate_final_coordinate(coordinates) do
     Enum.reduce(coordinates, {0, 0}, fn({x, y}, acc) ->
       case acc do
-        {0, 0} -> {x, y}
+        @initial_point -> {x, y}
         {new_x, new_y} -> {x + new_x, y + new_y}
       end
     end)
+  end
+
+  defp taxicab({q1, q2}) do
+    {p1, p2} = @initial_point
+    abs(p1 - q1) + abs(p2 - q2)
   end
 
 end
