@@ -1,12 +1,12 @@
 defmodule Adventofcode.Seventeen.Day01 do
   @initial_point {0, 0}
 
-  def complete_coordinates(instructions) do
+  def trace_walk(instructions) do
     instructions
-    |> expand_coordinates
+    |> trace_coordinates
   end
 
-  def expand_coordinates(instructions) do
+  def trace_coordinates(instructions) do
     instructions
     |> String.split(", ")
     |> Enum.map(&parse_string/1)
@@ -16,12 +16,15 @@ defmodule Adventofcode.Seventeen.Day01 do
   defp expand_walk_from([], _view, acc), do: acc
   defp expand_walk_from([{direction, blocks} | rest], view, [{x, y} | _next] = acc) do
     {to, x1, y1} = calculate_direction(direction, view)
-    {x1, y1} = {x + (blocks * x1), y + (blocks * y1)}
+    {new_x, new_y} = {x + (blocks * x1), y + (blocks * y1)}
 
-    points = for point <- x1..x, point != 0, do: {point, y1}
+    missing_points = generate_middle_points(x..new_x, y..new_y)
+    IO.inspect missing_points
 
-    walk_from(rest, to, points ++ acc)
+    expand_walk_from(rest, to, missing_points)
   end
+
+  defp generate_middle_points(x_points, y_points), do: for x <- x_points, y <- y_points, do: {x, y}
 
   ###### DAY 01 PT 1 ######
   def calculate_blocks(instructions) do
