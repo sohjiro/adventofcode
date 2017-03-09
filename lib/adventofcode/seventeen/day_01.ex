@@ -14,26 +14,26 @@ defmodule Adventofcode.Seventeen.Day01 do
     instructions
     |> String.split(", ")
     |> Enum.map(&to_charlist/1)
-    |> walk_to(:north, [@initial_point])
+    |> walk_from(:north, [@initial_point])
   end
 
-  defp walk_to([], _view, acc), do: acc
-  defp walk_to([[?R | blocks] | rest], view, [{x, y} | _next] = acc) do
+  defp walk_from([], _view, acc), do: acc
+  defp walk_from([[?R | blocks] | rest], view, [{x, y} | _next] = acc) do
     number_blocks = to_int(blocks)
     case view do
-      :north -> walk_to(rest, :east, [{x + number_blocks, y} | acc])
-      :south -> walk_to(rest, :west, [{x - number_blocks, y} | acc])
-      :east -> walk_to(rest, :south, [{x, y - number_blocks} | acc])
-      :west -> walk_to(rest, :north, [{x, y + number_blocks} | acc])
+      :north -> walk_from(rest, :east, [{x + number_blocks, y} | acc])
+      :south -> walk_from(rest, :west, [{x - number_blocks, y} | acc])
+      :east -> walk_from(rest, :south, [{x, y - number_blocks} | acc])
+      :west -> walk_from(rest, :north, [{x, y + number_blocks} | acc])
     end
   end
-  defp walk_to([[?L | blocks] | rest], view, [{x, y} | _next] = acc) do
+  defp walk_from([[?L | blocks] | rest], view, [{x, y} | _next] = acc) do
     number_blocks = to_int(blocks)
     case view do
-      :north -> walk_to(rest, :west, [{x - number_blocks, y} | acc])
-      :south -> walk_to(rest, :east, [{x + number_blocks, y} | acc])
-      :east -> walk_to(rest, :north, [{x, y + number_blocks} | acc])
-      :west -> walk_to(rest, :south, [{x, y - number_blocks} | acc])
+      :north -> walk_from(rest, :west, [{x - number_blocks, y} | acc])
+      :south -> walk_from(rest, :east, [{x + number_blocks, y} | acc])
+      :east -> walk_from(rest, :north, [{x, y + number_blocks} | acc])
+      :west -> walk_from(rest, :south, [{x, y - number_blocks} | acc])
     end
   end
   defp to_int(char), do: char |> to_string |> String.to_integer
