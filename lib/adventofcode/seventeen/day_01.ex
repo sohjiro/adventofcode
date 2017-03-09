@@ -24,6 +24,7 @@ defmodule Adventofcode.Seventeen.Day01 do
   end
 
   defp walk_on([], _view, acc), do: acc
+
   defp walk_on([[?R | blocks] | rest], :north, [{x, y} | _path] = acc) do
     number = to_int(blocks)
     walk_on(rest, :east, [{x + number, y} | acc])
@@ -32,6 +33,15 @@ defmodule Adventofcode.Seventeen.Day01 do
   defp walk_on([[?R | blocks] | rest], :east, [{x, y} | _path] = acc) do
     number = to_int(blocks)
     walk_on(rest, :south, [{x, y - number} | acc])
+  end
+  defp walk_on([[?L | blocks] | rest], :east, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :south, [{x, y + number} | acc])
+  end
+
+  defp walk_on([[?R | blocks] | rest], :south, [{x, y} | _path] = acc) do
+    number = to_int(blocks)
+    walk_on(rest, :south, [{x - number, y} | acc])
   end
 
   def convert_into_coordinate(direction) do
