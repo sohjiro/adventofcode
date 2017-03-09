@@ -33,6 +33,7 @@ defmodule Adventofcode.Seventeen.Day01 do
     end)
   end
 
+
   defp taxicab({q1, q2}) do
     {p1, p2} = @initial_point
     abs(p1 - q1) + abs(p2 - q2)

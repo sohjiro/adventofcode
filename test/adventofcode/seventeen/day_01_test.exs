@@ -16,6 +16,11 @@ defmodule Adventofcode.Seventeen.Day01Test do
     assert result == {2, 3}
   end
 
+  test "Given an R2, R2 direction should convert into a coordinate" do
+    result = Adventofcode.Seventeen.Day01.calculate_coordinates "R2, R2"
+    assert result == {2, -2}
+  end
+
   test "Given an R2, L3 direction should calculate distance blocks" do
     result = Adventofcode.Seventeen.Day01.calculate_blocks "R2, L3"
     assert result == 5
