@@ -18,14 +18,12 @@ defmodule Adventofcode.Seventeen.Day01 do
   defp expand_walk_from([{direction, blocks} | rest], view, [{x, y} | _next] = acc) do
     {to, x1, y1} = calculate_direction(direction, view)
     {new_x, new_y} = {x + (blocks * x1), y + (blocks * y1)}
-    missing_points = generate_middle_points(x..new_x, y..new_y) |> remove_last({x, y}) |> Enum.reverse
+    missing_points = generate_middle_points(x..new_x, y..new_y, {x, y}) |> Enum.reverse
     expand_walk_from(rest, to, missing_points ++ acc)
   end
 
-  defp remove_last([{x, y} | rest], {x, y}), do: rest
-  defp remove_last(data, _elements), do: data
-
-  defp generate_middle_points(x_points, y_points), do: for x <- x_points, y <- y_points, do: {x, y}
+  defp generate_middle_points(x_points, y_points, points),
+  do: for x <- x_points, y <- y_points, {x, y} != points, do: {x, y}
 
   ###### DAY 01 PT 1 ######
   def calculate_blocks(instructions) do
