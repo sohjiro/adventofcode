@@ -5,7 +5,14 @@ defmodule Adventofcode.Seventeen.Day02 do
     |> to_charlist
     |> Enum.map(&convert/1)
   end
-  def convert(direction) do
+
+  def move_from({x, y}, direction) do
+    {x1, y1} = convert(direction)
+    {x + x1, y + y1}
+  end
+
+
+  defp convert(direction) do
     case direction do
       ?U -> {0, -1}
       ?D -> {0, 1}
