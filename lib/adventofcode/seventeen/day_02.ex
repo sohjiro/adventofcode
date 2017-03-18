@@ -14,10 +14,10 @@ defmodule Adventofcode.Seventeen.Day02 do
 
   defp convert(direction) do
     case direction do
-      ?U -> {0, -1}
-      ?D -> {0, 1}
-      ?L -> {-1, 0}
-      ?R -> {1, 0}
+      ?U -> {-1, 0}
+      ?D -> {1, 0}
+      ?L -> {0, -1}
+      ?R -> {0, 1}
     end
   end
 
