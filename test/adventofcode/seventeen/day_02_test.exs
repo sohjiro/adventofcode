@@ -6,14 +6,19 @@ defmodule Adventofcode.Seventeen.Day02Test do
     assert result == [{-1, 0}]
   end
 
-  test "Given a point and an UP direction should return the above point" do
-    result = Adventofcode.Seventeen.Day02.move_from {1, 1}, ?U
-    assert result == {0, 1}
+  test "Given an D should move one position DOWN" do
+    result = Adventofcode.Seventeen.Day02.move "D"
+    assert result == [{1, 0}]
   end
 
-  test "Given a point and a DOWN direction should return the below point" do
-    result = Adventofcode.Seventeen.Day02.move_from {1, 1}, ?D
-    assert result == {2, 1}
+  test "Given an L should move one position LEFT" do
+    result = Adventofcode.Seventeen.Day02.move "L"
+    assert result == [{0, -1}]
+  end
+
+  test "Given an R should move one position RIGHT" do
+    result = Adventofcode.Seventeen.Day02.move "R"
+    assert result == [{0, 1}]
   end
 
 end
