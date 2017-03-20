@@ -6,12 +6,6 @@ defmodule Adventofcode.Seventeen.Day02 do
     |> Enum.map(&convert/1)
   end
 
-  def move_from({x, y}, direction) do
-    {x1, y1} = convert(direction)
-    {x + x1, y + y1}
-  end
-
-
   defp convert(direction) do
     case direction do
       ?U -> {-1, 0}
