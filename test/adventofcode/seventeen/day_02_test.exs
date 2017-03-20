@@ -1,7 +1,7 @@
 defmodule Adventofcode.Seventeen.Day02Test do
   use ExUnit.Case
 
-  test "Given an U should move one position up" do
+  test "Given an U should move one position UP" do
     result = Adventofcode.Seventeen.Day02.move "U"
     assert result == [{-1, 0}]
   end
@@ -19,6 +19,11 @@ defmodule Adventofcode.Seventeen.Day02Test do
   test "Given an R should move one position RIGHT" do
     result = Adventofcode.Seventeen.Day02.move "R"
     assert result == [{0, 1}]
+  end
+
+  test "Given a couple of instructions should return a list of axis" do
+    result = Adventofcode.Seventeen.Day02.move "ULDR"
+    assert result == [{-1, 0}, {0, -1}, {1, 0}, {0, 1}]
   end
 
 end
