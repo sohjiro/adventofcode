@@ -26,4 +26,9 @@ defmodule Adventofcode.Seventeen.Day02Test do
     assert result == [{-1, 0}, {0, -1}, {1, 0}, {0, 1}]
   end
 
+  test "Given a list of axis should return a code number" do
+    result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {0, -1}, {1, 0}, {0, 1}, {1, 0}]
+    assert result == 8
+  end
+
 end

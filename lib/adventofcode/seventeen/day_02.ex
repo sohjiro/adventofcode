@@ -1,10 +1,20 @@
 defmodule Adventofcode.Seventeen.Day02 do
+  @numbers [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
   def move(directions) do
     directions
     |> to_charlist
     |> Enum.map(&convert/1)
   end
+
+  def calculate_number(axis) do
+    axis
+    |> Enum.reduce({1, 1}, &sum_axis(&1, &2))
+    |> transform_to_number
+  end
+
+  defp sum_axis({x, y}, {x1, y1}), do: {x + x1, y + y1}
+  defp transform_to_number({x, y}), do: @numbers |> Enum.at(x) |> Enum.at(y)
 
   defp convert(direction) do
     case direction do
