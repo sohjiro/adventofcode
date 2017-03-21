@@ -51,8 +51,8 @@ defmodule Adventofcode.Seventeen.Day02Test do
   end
 
   test "Given a string of instructions, should return two numbers" do
-    result = Adventofcode.Seventeen.Day02.break_number "ULL\nRRDDD"
-    assert result == [1, 9]
+    result = Adventofcode.Seventeen.Day02.break_number "ULL\nRRDDD\nLURDL\nUUUUD"
+    assert result == [1, 9, 8, 5]
   end
 
 end
