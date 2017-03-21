@@ -1,6 +1,12 @@
 defmodule Adventofcode.Seventeen.Day02 do
   @numbers [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
+  def break_number(instructions) do
+    instructions
+    |> String.split("\n")
+    |> Enum.map(&keypad/1)
+  end
+
   def keypad(instructions) do
     instructions
     |> instructions_to_axis

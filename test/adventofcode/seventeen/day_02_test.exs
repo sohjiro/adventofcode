@@ -50,8 +50,9 @@ defmodule Adventofcode.Seventeen.Day02Test do
     assert result == 8
   end
 
-  # 123
-  # 456
-  # 789
+  test "Given a string of instructions, should return two numbers" do
+    result = Adventofcode.Seventeen.Day02.break_number "ULL\nRRDDD"
+    assert result == [1, 9]
+  end
 
 end
