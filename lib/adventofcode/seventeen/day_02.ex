@@ -10,7 +10,7 @@ defmodule Adventofcode.Seventeen.Day02 do
   def keypad(instructions) do
     instructions
     |> instructions_to_axis
-    |> calculate_number
+    |> calculate_number({1, 1})
   end
 
   def instructions_to_axis(directions) do
@@ -19,9 +19,9 @@ defmodule Adventofcode.Seventeen.Day02 do
     |> Enum.map(&convert/1)
   end
 
-  def calculate_number(axis) do
+  def calculate_number(axis, starting_point) do
     axis
-    |> Enum.reduce({1, 1}, &sum_axis(&1, &2))
+    |> Enum.reduce(starting_point, &sum_axis(&1, &2))
     |> transform_to_number
   end
 

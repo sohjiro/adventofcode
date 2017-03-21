@@ -27,8 +27,11 @@ defmodule Adventofcode.Seventeen.Day02Test do
   end
 
   test "Given a list of axis should return a code number" do
-    result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {0, -1}, {1, 0}, {0, 1}, {1, 0}]
+    result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {0, -1}, {1, 0}, {0, 1}, {1, 0}], {1, 1}
     assert result == 8
+
+    result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {-1, 0}], {1, 1}
+    assert result == 2
   end
 
   test "Given a string of instructions, should convert to a keypad number" do
