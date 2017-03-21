@@ -5,7 +5,8 @@ defmodule Adventofcode.Seventeen.Day02 do
   def keypad(instructions) do
     instructions
     |> String.split("\n")
-    |> Enum.map(&instructions_to_axis/1)
+    |> Enum.map(&Task.async(Adventofcode.Seventeen.Day02, :instructions_to_axis, [&1]))
+    |> Enum.map(&Task.await/1)
     |> calculate_axes
     |> Enum.map(&convert_to_digit/1)
   end
