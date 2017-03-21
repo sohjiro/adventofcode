@@ -1,7 +1,13 @@
 defmodule Adventofcode.Seventeen.Day02 do
   @numbers [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
-  def move(directions) do
+  def keypad(instructions) do
+    instructions
+    |> instructions_to_axis
+    |> calculate_number
+  end
+
+  def instructions_to_axis(directions) do
     directions
     |> to_charlist
     |> Enum.map(&convert/1)
