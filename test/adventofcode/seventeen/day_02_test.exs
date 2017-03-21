@@ -30,8 +30,8 @@ defmodule Adventofcode.Seventeen.Day02Test do
     result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {0, -1}, {1, 0}, {0, 1}, {1, 0}], {1, 1}
     assert result == 8
 
-    result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {-1, 0}], {1, 1}
-    assert result == 2
+    result = Adventofcode.Seventeen.Day02.calculate_number [{-1, 0}, {-1, 0}], {2, 2}
+    assert result == 3
   end
 
   test "Given a string of instructions, should convert to a keypad number" do
