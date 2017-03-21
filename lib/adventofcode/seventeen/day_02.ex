@@ -19,8 +19,12 @@ defmodule Adventofcode.Seventeen.Day02 do
     |> transform_to_number
   end
 
-  defp sum_axis({x, y}, {x1, y1}), do: {x + x1, y + y1}
-  defp transform_to_number({x, y}), do: @numbers |> Enum.at(x) |> Enum.at(y)
+  def sum_axis({x, y}, {x1, y1}), do: {x + x1, y + y1}
+  defp transform_to_number({x, y}), do: @numbers |> calculate_axis(x) |> calculate_axis(y)
+
+  defp calculate_axis(enumerable, number) when number < 0, do: enumerable |> Enum.at(0)
+  defp calculate_axis(enumerable, number) when number > 2, do: enumerable |> Enum.at(2)
+  defp calculate_axis(enumerable, number), do: enumerable |> Enum.at(number)
 
   defp convert(direction) do
     case direction do

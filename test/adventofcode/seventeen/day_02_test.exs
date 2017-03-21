@@ -31,9 +31,23 @@ defmodule Adventofcode.Seventeen.Day02Test do
     assert result == 8
   end
 
-  test "Given a string of instructions should convert to a keypad number" do
+  test "Given a string of instructions, should convert to a keypad number" do
     result = Adventofcode.Seventeen.Day02.keypad "ULD"
     assert result == 4
+  end
+
+  test "Given a string of instructions, should handle invalid directions" do
+    result = Adventofcode.Seventeen.Day02.keypad "UUU"
+    assert result == 2
+
+    result = Adventofcode.Seventeen.Day02.keypad "LLL"
+    assert result == 4
+
+    result = Adventofcode.Seventeen.Day02.keypad "RRR"
+    assert result == 6
+
+    result = Adventofcode.Seventeen.Day02.keypad "DDD"
+    assert result == 8
   end
 
   # 123
