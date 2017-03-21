@@ -1,16 +1,13 @@
 defmodule Adventofcode.Seventeen.Day02 do
   @numbers [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-
-  def break_number(instructions) do
-    instructions
-    |> String.split("\n")
-    |> Enum.map(&keypad/1)
-  end
+  @initial_point {1, 1}
 
   def keypad(instructions) do
     instructions
-    |> instructions_to_axis
-    |> calculate_number({1, 1})
+    |> String.split("\n")
+    |> Enum.map(&instructions_to_axis/1)
+    |> calculate_axes
+    |> Enum.map(&convert_to_digit/1)
   end
 
   def instructions_to_axis(directions) do
@@ -19,18 +16,24 @@ defmodule Adventofcode.Seventeen.Day02 do
     |> Enum.map(&convert/1)
   end
 
-  def calculate_number(axis, starting_point) do
-    axis
-    |> Enum.reduce(starting_point, &sum_axis(&1, &2))
-    |> transform_to_number
+  def calculate_axes(axes, acc \\ [@initial_point])
+  def calculate_axes([], acc), do: acc |> Enum.reverse |> tl
+  def calculate_axes([axis | rest], [last_point | _next] = acc) do
+    result = calculate_axis(axis, last_point)
+    calculate_axes(rest, [result | acc])
   end
 
-  def sum_axis({x, y}, {x1, y1}), do: {x + x1, y + y1}
-  defp transform_to_number({x, y}), do: @numbers |> calculate_axis(x) |> calculate_axis(y)
+  def calculate_axis(axis, starting_point) do
+    axis |> Enum.reduce(starting_point, &sum_axis(&1, &2))
+  end
 
-  defp calculate_axis(enumerable, number) when number < 0, do: enumerable |> Enum.at(0)
-  defp calculate_axis(enumerable, number) when number > 2, do: enumerable |> Enum.at(2)
-  defp calculate_axis(enumerable, number), do: enumerable |> Enum.at(number)
+  def sum_axis({x, y}, {x1, y1}), do: {valid(x + x1), valid(y + y1)}
+
+  defp valid(number) when number < 0, do: 0
+  defp valid(number) when number > 2, do: 2
+  defp valid(number), do: number
+
+  def convert_to_digit({x, y}), do: @numbers |> Enum.at(x) |> Enum.at(y)
 
   defp convert(direction) do
     case direction do
